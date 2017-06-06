@@ -20,7 +20,6 @@ public class DAO {
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/todolist", "root", "adgjlra1");
-		System.out.println("Conectado com banco de dados");
 		
 	} 
 	catch (ClassNotFoundException e) {
@@ -128,6 +127,7 @@ public class DAO {
 				Tarefas tarefa = new Tarefas();
 				tarefa.setNomeTarefa(rs.getString("nome_tarefa"));
 				tarefa.setDescricaoTarefa(rs.getString("descricao_tarefa"));
+				tarefa.setId(rs.getInt("id"));
 				
 				tarefas.add(tarefa);
 			}			
@@ -144,6 +144,7 @@ public class DAO {
 	
 	public void remove(Tarefas tarefa){
 		PreparedStatement stmt;
+		System.out.println("Entrou em remove");
 		try {
 			stmt = (PreparedStatement) connection.prepareStatement("DELETE FROM tarefa WHERE id=?");
 			stmt.setInt(1, tarefa.getId());
@@ -155,6 +156,7 @@ public class DAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("REMOVEU A TAREFA");
 	}
 	
 	public void adicionaCategoria(Categorias categoria){

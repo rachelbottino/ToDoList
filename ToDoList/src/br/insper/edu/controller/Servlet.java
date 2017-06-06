@@ -113,7 +113,8 @@ public class Servlet extends HttpServlet {
 		
 		//BOTAO TAREFA FEITA
 		for (Tarefas tarefa : tarefas) {
-			if(request.getParameter("feita_"+tarefa.getId())!=null){
+			if(request.getParameter("apagar_"+tarefa.getId())!=null){
+				System.out.println(tarefa.getId());
 				System.out.println("Removendo tarefa");
 				dao.remove(tarefa);
 				request.getRequestDispatcher("Home.jsp").forward(request, response);
