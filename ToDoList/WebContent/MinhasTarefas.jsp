@@ -57,7 +57,7 @@
                 <div class="col-lg-12 text-center">
                 <br>
                     <h2 class="section-heading">To Do</h2>
-                    <h3 class="section-subheading text-muted">Suas tarefas programadas!</h3>                    
+                    <h3 class="section-subheading text-muted">Suas tarefas para fazer!</h3>                    
                 </div>
             </div>
             <div class="row">
@@ -68,8 +68,8 @@
 			  email = (String) session.getAttribute("user");
 	          
 	          for (Tarefas tarefa : tarefas) {
+	        	  System.out.println(tarefa.getConcluida());
 	           %>
-
             <!--INICIO CARD-->
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <div class="portfolio-caption">
@@ -102,9 +102,9 @@
                 </div>
             </div>
             <div class="row">
-             <%	          
-	          for (Tarefas tarefa : tarefas) {
-	        	  if ("S".equals(tarefa.getConcluida())){
+             <%
+              List<Tarefas> tarefasconcluidas = dao.listaTarefasConcluidas();
+	          for (Tarefas tarefa : tarefasconcluidas) {
 	           %>
 
             <!--INICIO CARD-->
@@ -117,9 +117,14 @@
                     <header class="postitazul-header"><span class="text"></span></header>                    
                         <h3><%=tarefa.getDescricaoTarefa()%></h3>                        
                     </div>
+                    <form method='get' enctype="multipart/form-data">
+	                    <div class="portfolio-caption">
+	                        <input type="submit" class="btn btn-primary-1" data-dismiss="modal" name="apagar_<%=tarefa.getId()%>" value="Apagar"></input> 
+	                    </div>
+	               </form>
                 </div>
             <!--FIM CARD--> 
-            <% }} %>                
+            <% } %>                
         </div>
     </section>
     <footer>

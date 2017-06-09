@@ -32,6 +32,7 @@ public class Servlet extends HttpServlet {
 		Tarefas nova_tarefa = new Tarefas();
 		Categorias nova_categoria = new Categorias();
 		List<Tarefas> tarefas = dao.listaTarefas();
+		List<Tarefas> tarefasconcluidas = dao.listaTarefasConcluidas();
 		HttpSession session = request.getSession();
 		
 		if(request.getParameter("cadastro")!=null){
@@ -100,6 +101,7 @@ public class Servlet extends HttpServlet {
 			nova_tarefa.setNomeTarefa(request.getParameter("nome_tarefa"));
 			nova_tarefa.setDescricaoTarefa(request.getParameter("descricao_tarefa"));
 			nova_tarefa.setCategoria(request.getParameter("categoria"));
+			nova_tarefa.setConcluida("Nao");
 			
 //			String email = (String) session.getAttribute("email");
 //			nova_tarefa.setUsuarioId(dao.getUsuarioId(email));
@@ -116,20 +118,29 @@ public class Servlet extends HttpServlet {
 		for (Tarefas tarefa : tarefas) {
 			//BOTAO APAGAR TAREFA
 			if(request.getParameter("apagar_"+tarefa.getId())!=null){
-				System.out.println(tarefa.getId());
 				System.out.println("Removendo tarefa");
 				dao.remove(tarefa);
 				request.getRequestDispatcher("Home.jsp").forward(request, response);
 			}
 			//BOTAO TAREFA FEITA
-			if(request.getParameter("feito_"+tarefa.getId())!=null){
+			else if(request.getParameter("feita_"+tarefa.getId())!=null){
+				System.out.println(tarefa.getId());
 				System.out.println("entrou concluir");
-				tarefa.setConcluida("S");
+				tarefa.setConcluida("Sim");
 				dao.concluiTarefa(tarefa);
-				
+				System.out.println(tarefa.getConcluida());				
 				request.getRequestDispatcher("Home.jsp").forward(request, response);				
 			}
 			request.getRequestDispatcher("Home.jsp").forward(request, response);
+		}
+		
+		for (Tarefas tarefa : tarefasconcluidas) {
+			//BOTAO APAGAR TAREFA
+			if(request.getParameter("apagar_"+tarefa.getId())!=null){
+				System.out.println("Removendo tarefa");
+				dao.remove(tarefa);
+				request.getRequestDispatcher("Home.jsp").forward(request, response);
+			}
 		}
 			
 }

@@ -97,7 +97,7 @@ public class DAO {
 	}
 	
 	public void adicionaTarefa(Tarefas tarefa){
-		String sql = "INSERT into tarefa "+"(nome_tarefa,descricao_tarefa,categoria) values(?,?,?)";
+		String sql = "INSERT into tarefa "+"(nome_tarefa,descricao_tarefa,categoria,concluida) values(?,?,?,?)";
 		PreparedStatement stmt;
 		try {
 			stmt = (PreparedStatement) connection.prepareStatement(sql);
@@ -106,7 +106,8 @@ public class DAO {
 			stmt.setString(1,tarefa.getNomeTarefa());
 			stmt.setString(2, tarefa.getDescricaoTarefa());
 			stmt.setString(3, tarefa.getCategoria());
-			//stmt.setString(4, tarefa.getData());
+			stmt.setString(4, tarefa.getConcluida());
+			//stmt.setString(5, tarefa.getData());
 			stmt.execute();
 			stmt.close();
 		}
@@ -116,6 +117,7 @@ public class DAO {
 	}
 	
 	public void concluiTarefa(Tarefas tarefa){
+		System.out.println("Entrou em concluiTarefa");
 		String sql = "UPDATE Tarefa SET concluida =? WHERE id=?";
 		PreparedStatement stmt;
 		try {
@@ -138,6 +140,34 @@ public class DAO {
 		
 		try {
 			stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tarefa");
+			ResultSet rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				Tarefas tarefa = new Tarefas();
+				tarefa.setNomeTarefa(rs.getString("nome_tarefa"));
+				tarefa.setDescricaoTarefa(rs.getString("descricao_tarefa"));
+				tarefa.setId(rs.getInt("id"));
+				
+				tarefas.add(tarefa);
+			}			
+			rs.close();
+			stmt.close();
+			
+		} 
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return tarefas;
+	}
+	
+	public List<Tarefas> listaTarefasConcluidas(){
+		List<Tarefas> tarefas = new ArrayList<Tarefas>();
+		
+		PreparedStatement stmt;
+		
+		try {
+			stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tarefa WHERE concluida='Sim'");
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
