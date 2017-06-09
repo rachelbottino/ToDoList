@@ -95,10 +95,10 @@ public class Servlet extends HttpServlet {
 			request.getRequestDispatcher("Home.jsp").forward(request, response);
 			
 			//TESTANDO LISTA CATEGORIAS:
-			for (Categorias categoria : categorias){
-				System.out.println(categoria.getNomeCategoria());
-				
-			}
+//			for (Categorias categoria : categorias){
+//				System.out.println(categoria.getNomeCategoria());
+//				
+//			}
 		}
 		
 		// BOTAO CRIAR TAREFA
@@ -131,11 +131,11 @@ public class Servlet extends HttpServlet {
 			}
 			//BOTAO TAREFA FEITA
 			else if(request.getParameter("feita_"+tarefa.getId())!=null){
-				System.out.println(tarefa.getId());
+				//System.out.println(tarefa.getId());
 				System.out.println("entrou concluir");
 				tarefa.setConcluida("Sim");
 				dao.concluiTarefa(tarefa);
-				System.out.println(tarefa.getConcluida());				
+				//System.out.println(tarefa.getConcluida());				
 				request.getRequestDispatcher("Home.jsp").forward(request, response);				
 			}
 			request.getRequestDispatcher("Home.jsp").forward(request, response);

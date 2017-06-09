@@ -279,7 +279,7 @@ fieldset[disabled] .btn-xl.active {
   transition: all 1s ease-in-out;
 }
 
-.postitrosa {
+.postitRosa {
   position: auto;
   top: 100%;
   left: 100%;
@@ -290,11 +290,11 @@ fieldset[disabled] .btn-xl.active {
   border-radius: 0px;
   overflow: hidden;
 }
-.postitrosa:hover > .postitrosa-header {
+.postitRosa:hover > .postitRosa-header {
   width: 2rem;
 }
 
-.postitrosa-header {
+.postitRosa-header {
   position: absolute;
   left: 0;
   top: 0;
@@ -305,7 +305,7 @@ fieldset[disabled] .btn-xl.active {
   transition: width 1.0s ease-in-out;
 }
 
-.postitverde {
+.postitVerde {
   position: auto;
   top: 100%;
   left: 100%;
@@ -316,11 +316,11 @@ fieldset[disabled] .btn-xl.active {
   border-radius: 0px;
   overflow: hidden;
 }
-.postitverde:hover > .postitverde-header {
+.postitVerde:hover > .postitVerde-header {
   width: 2rem;
 }
 
-.postitverde-header {
+.postitVerde-header {
   position: absolute;
   left: 0;
   top: 0;
@@ -331,7 +331,7 @@ fieldset[disabled] .btn-xl.active {
   transition: width 1.0s ease-in-out;
 }
 
-.postitamarelo {
+.postitAmarelo {
   position: auto;
   top: 100%;
   left: 100%;
@@ -342,11 +342,11 @@ fieldset[disabled] .btn-xl.active {
   border-radius: 0px;
   overflow: hidden;
 }
-.postitamarelo:hover > .postitamarelo-header {
+.postitAmarelo:hover > .postitAmarelo-header {
   width: 2rem;
 }
 
-.postitamarelo-header {
+.postitAmarelo-header {
   position: absolute;
   left: 0;
   top: 0;
@@ -357,7 +357,7 @@ fieldset[disabled] .btn-xl.active {
   transition: width 1.0s ease-in-out;
 }
 
-.postitlaranja {
+.postitLaranja {
   position: auto;
   top: 100%;
   left: 100%;
@@ -368,11 +368,11 @@ fieldset[disabled] .btn-xl.active {
   border-radius: 0px;
   overflow: hidden;
 }
-.postitlaranja:hover > .postitlaranja-header {
+.postitLaranja:hover > .postitLaranja-header {
   width: 2rem;
 }
 
-.postitlaranja-header {
+.postitLaranja-header {
   position: absolute;
   left: 0;
   top: 0;
@@ -383,7 +383,7 @@ fieldset[disabled] .btn-xl.active {
   transition: width 1.0s ease-in-out;
 }
 
-.postitroxo {
+.postitRoxo {
   position: auto;
   top: 100%;
   left: 100%;
@@ -394,11 +394,11 @@ fieldset[disabled] .btn-xl.active {
   border-radius: 0px;
   overflow: hidden;
 }
-.postitroxo:hover > .postitroxo-header {
+.postitRoxo:hover > .postitRoxo-header {
   width: 2rem;
 }
 
-.postitroxo-header {
+.postitRoxo-header {
   position: absolute;
   left: 0;
   top: 0;
@@ -409,11 +409,11 @@ fieldset[disabled] .btn-xl.active {
   transition: width 1.0s ease-in-out;
 }
 
-.postitazul:hover > .postitazul-header {
+.postitAzul:hover > .postitAzul-header {
   width: 2rem;
 }
 
-.postitazul-header {
+.postitAzul-header {
   position: absolute;
   left: 0;
   top: 0;

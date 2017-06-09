@@ -34,7 +34,7 @@ public class DAO {
 	}
 	
 	public void adicionaUsuario(Usuarios usuario){
-		String sql = "INSERT into usuario"+"(nome,email,senha) values(?,?,?)";
+		String sql = "INSERT into Usuario"+"(nome,email,senha) values(?,?,?)";
 		PreparedStatement stmt;
 		try {
 			
@@ -55,10 +55,10 @@ public class DAO {
 	
 	public boolean valida_usuario(String email, String senha){
 		boolean status = false;
-		String sql = "SELECT * FROM usuario WHERE email=? AND senha=?";
+		String sql = "SELECT * FROM Usuario WHERE email=? AND senha=?";
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        System.out.println("Entrou em valida usuario!");
+        //System.out.println("Entrou em valida usuario!");
         
         try{
         	stmt = (PreparedStatement) connection.prepareStatement(sql);
@@ -78,7 +78,7 @@ public class DAO {
 	
 	public int getUsuarioId(String email){
 		int usuarioId = 0;
-		String sql = "select id from usuario where email=?";
+		String sql = "select id from Usuario where email=?";
 		PreparedStatement stmt;
 		ResultSet rs;
 		try{
@@ -94,6 +94,35 @@ public class DAO {
         	e.printStackTrace();
         }
 		return usuarioId;
+	}
+	
+	public String getColorFromNome(String nomeCategoria){
+		
+		String postit_color = null;
+		
+		String sql = "SELECT postit FROM Categoria WHERE nome_categoria=?";
+		PreparedStatement stmt;
+		ResultSet rs;
+		System.out.println("ENTRO NO METODO GET COLOR FROM NOME");
+		try {
+			stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, nomeCategoria);
+			rs = stmt.executeQuery();
+			rs.next();
+			postit_color = rs.getString("postit");
+			System.out.println(rs.getString("postit"));
+			
+			stmt.execute();
+			
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return postit_color;
 	}
 	
 	public void adicionaTarefa(Tarefas tarefa){
@@ -139,13 +168,14 @@ public class DAO {
 		PreparedStatement stmt;
 		
 		try {
-			stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tarefa");
+			stmt = (PreparedStatement) connection.prepareStatement("SELECT * FROM tarefa WHERE concluida='Nao'");
 			ResultSet rs = stmt.executeQuery();
 			
 			while (rs.next()) {
 				Tarefas tarefa = new Tarefas();
 				tarefa.setNomeTarefa(rs.getString("nome_tarefa"));
 				tarefa.setDescricaoTarefa(rs.getString("descricao_tarefa"));
+				tarefa.setCategoria(rs.getString("categoria"));
 				tarefa.setId(rs.getInt("id"));
 				
 				tarefas.add(tarefa);
@@ -174,6 +204,7 @@ public class DAO {
 				Tarefas tarefa = new Tarefas();
 				tarefa.setNomeTarefa(rs.getString("nome_tarefa"));
 				tarefa.setDescricaoTarefa(rs.getString("descricao_tarefa"));
+				tarefa.setCategoria(rs.getString("categoria"));
 				tarefa.setId(rs.getInt("id"));
 				
 				tarefas.add(tarefa);
@@ -212,7 +243,7 @@ public class DAO {
 		PreparedStatement stmt;
 		try {
 			stmt = (PreparedStatement) connection.prepareStatement(sql);
-			System.out.println("adiciona categoria");
+			//System.out.println("adiciona categoria");
 			stmt.setString(1, categoria.getNomeCategoria());
 			stmt.setString(2,categoria.getPostIt());
 			System.out.println("Categoria adicionada!");

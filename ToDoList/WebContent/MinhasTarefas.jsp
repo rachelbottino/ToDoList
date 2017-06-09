@@ -68,16 +68,18 @@
 			  email = (String) session.getAttribute("user");
 	          
 	          for (Tarefas tarefa : tarefas) {
-	        	  System.out.println(tarefa.getConcluida());
+	        	  System.out.println("AQUI A COR DO POST IT");
+	        	  System.out.println(tarefa.getCategoria());
 	           %>
             <!--INICIO CARD-->
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <div class="portfolio-caption">
                         <h4><%=tarefa.getNomeTarefa()%></h4>
+                        <h5><%=tarefa.getCategoria()%></h5>
                         <!--  <p class="text-muted">14/09</p>-->
                     </div>
-                    <div class="portfolio-caption portfolio-hover-content portfolio-description postitazul"> 
-                    <header class="postitazul-header"><span class="text"></span></header>                    
+                    <div class="portfolio-caption portfolio-hover-content portfolio-description postit<%=dao.getColorFromNome(tarefa.getCategoria())%>"> 
+                    <header class="postit<%=dao.getColorFromNome(tarefa.getCategoria())%>-header"><span class="text"></span></header>                    
                         <h3><%=tarefa.getDescricaoTarefa()%></h3>                        
                     </div>
                     <form method='get' enctype="multipart/form-data">
@@ -111,10 +113,11 @@
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <div class="portfolio-caption">
                         <h4><%=tarefa.getNomeTarefa()%></h4>
+                        <h5><%=tarefa.getCategoria()%></h5>
                         <!--  <p class="text-muted">14/09</p>-->
                     </div>
-                    <div class="portfolio-caption portfolio-hover-content portfolio-description postitazul"> 
-                    <header class="postitazul-header"><span class="text"></span></header>                    
+                    <div class="portfolio-caption portfolio-hover-content portfolio-description postit<%=dao.getColorFromNome(tarefa.getCategoria())%>"> 
+                    <header class="postit<%=dao.getColorFromNome(tarefa.getCategoria())%>-header"><span class="text"></span></header>                    
                         <h3><%=tarefa.getDescricaoTarefa()%></h3>                        
                     </div>
                     <form method='get' enctype="multipart/form-data">
