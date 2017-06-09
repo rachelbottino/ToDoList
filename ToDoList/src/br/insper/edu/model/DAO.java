@@ -126,7 +126,7 @@ public class DAO {
 	}
 	
 	public void adicionaTarefa(Tarefas tarefa){
-		String sql = "INSERT into tarefa "+"(nome_tarefa,descricao_tarefa,categoria,concluida) values(?,?,?,?)";
+		String sql = "INSERT into tarefa "+"(nome_tarefa,descricao_tarefa,categoria,concluida,usuario_id) values(?,?,?,?,?)";
 		PreparedStatement stmt;
 		try {
 			stmt = (PreparedStatement) connection.prepareStatement(sql);
@@ -136,6 +136,7 @@ public class DAO {
 			stmt.setString(2, tarefa.getDescricaoTarefa());
 			stmt.setString(3, tarefa.getCategoria());
 			stmt.setString(4, tarefa.getConcluida());
+			stmt.setInt(5, tarefa.getUsuarioId());
 			//stmt.setString(5, tarefa.getData());
 			stmt.execute();
 			stmt.close();
@@ -238,7 +239,7 @@ public class DAO {
 	}
 	
 	public void adicionaCategoria(Categorias categoria){
-		String sql = "INSERT into categoria "+"(nome_categoria,postit) values(?,?)";
+		String sql = "INSERT into categoria "+"(nome_categoria,postit,usuario_id) values(?,?,?)";
 		System.out.println("Entrou em adiciona categoria");
 		PreparedStatement stmt;
 		try {
@@ -246,6 +247,7 @@ public class DAO {
 			//System.out.println("adiciona categoria");
 			stmt.setString(1, categoria.getNomeCategoria());
 			stmt.setString(2,categoria.getPostIt());
+			stmt.setInt(3, categoria.getUsuarioId());
 			System.out.println("Categoria adicionada!");
 			stmt.execute();
 			stmt.close();

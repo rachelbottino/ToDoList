@@ -63,13 +63,12 @@
             <div class="row">
              <%
 	          DAO dao = new DAO();
-	          List<Tarefas> tarefas = dao.listaTarefas();
-	          String email = null;
+			  String email = null;
 			  email = (String) session.getAttribute("user");
+	          List<Tarefas> tarefas = dao.listaTarefas();
 	          
 	          for (Tarefas tarefa : tarefas) {
-	        	  System.out.println("AQUI A COR DO POST IT");
-	        	  System.out.println(tarefa.getCategoria());
+	        		  
 	           %>
             <!--INICIO CARD-->
                 <div class="col-md-4 col-sm-6 portfolio-item">
@@ -90,7 +89,7 @@
 	               </form>
                 </div>
             <!--FIM CARD--> 
-            <% } %>                
+            <% }%>                
         </div>
     </section>
     

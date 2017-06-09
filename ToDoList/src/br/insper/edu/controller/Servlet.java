@@ -1,15 +1,9 @@
 package br.insper.edu.controller;
 import br.insper.edu.model.*;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +26,7 @@ public class Servlet extends HttpServlet {
 		Tarefas nova_tarefa = new Tarefas();
 		Categorias nova_categoria = new Categorias();
 		List<Tarefas> tarefas = dao.listaTarefas();
-		List<Categorias> categorias = dao.listaCategorias();
+		//List<Categorias> categorias = dao.listaCategorias();
 		List<Tarefas> tarefasconcluidas = dao.listaTarefasConcluidas();
 		HttpSession session = request.getSession();
 		
@@ -60,6 +54,7 @@ public class Servlet extends HttpServlet {
 				Cookie userEmail = new Cookie("email", email);
 				userEmail.setMaxAge(30*60);
 				response.addCookie(userEmail);
+				//System.out.println(session.getAttribute("user"));
 				request.getRequestDispatcher("Home.jsp").forward(request, response);
 			}
 			else{
@@ -89,7 +84,7 @@ public class Servlet extends HttpServlet {
 			System.out.println("CRIANDO NOVA CATEGORIA");
 			nova_categoria.setNomeCategoria(request.getParameter("nome_categoria"));
 			nova_categoria.setPostIt(request.getParameter("postit_color"));
-			String email = (String) session.getAttribute("email");
+			String email = (String) session.getAttribute("user");
 			nova_categoria.setUsuarioId(dao.getUsuarioId(email));
 			dao.adicionaCategoria(nova_categoria);
 			request.getRequestDispatcher("Home.jsp").forward(request, response);
@@ -109,9 +104,8 @@ public class Servlet extends HttpServlet {
 			nova_tarefa.setDescricaoTarefa(request.getParameter("descricao_tarefa"));
 			nova_tarefa.setCategoria(request.getParameter("categoria"));
 			nova_tarefa.setConcluida("Nao");
-			
-//			String email = (String) session.getAttribute("email");
-//			nova_tarefa.setUsuarioId(dao.getUsuarioId(email));
+			String email = (String) session.getAttribute("user");
+			nova_tarefa.setUsuarioId(dao.getUsuarioId(email));
 			dao.adicionaTarefa(nova_tarefa);
 			System.out.println("Tarefa adicionada");
 			request.getRequestDispatcher("Home.jsp").forward(request, response);
