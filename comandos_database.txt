@@ -1,0 +1,29 @@
+CREATE DATABASE todolist;
+
+USE todolist;
+
+CREATE TABLE Usuario(
+id INT NOT NULL AUTO INCREMENT,
+nome VARCHAR(32) NOT NULL,
+email VARCHAR(32) NOT NULL UNIQUE,
+senha VARCHAR(32) NOT NULL,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE Categoria(
+id INT NOT NULL AUTO INCREMENT,
+nome_categoria VARCHAR(32) NOT NULL,
+postit VARCHAR(15) NOT NULL,
+usuario_id INT,
+PRIMARY KEY(id)
+);
+
+CREATE TABLE Tarefa(
+id INT NOT NULL AUTO INCREMENT,
+nome_tarefa VARCHAR(32) NOT NULL,
+descricao_tarefa VARCHAR(140) NOT NULL,
+categoria VARCHAR(32),
+concluida VARCHAR(5)
+usuario_id INT,
+PRIMARY KEY(id)
+);
