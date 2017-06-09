@@ -97,14 +97,15 @@ public class DAO {
 	}
 	
 	public void adicionaTarefa(Tarefas tarefa){
-		String sql = "INSERT into tarefa "+"(usuario_id,nome_tarefa,descricao_tarefa) values(?,?,?)";
+		String sql = "INSERT into tarefa "+"(nome_tarefa,descricao_tarefa,categoria) values(?,?,?)";
 		PreparedStatement stmt;
 		try {
 			stmt = (PreparedStatement) connection.prepareStatement(sql);
 			System.out.println("adiciona tarefa");
-			stmt.setInt(1, tarefa.getUsuarioId());
-			stmt.setString(2,tarefa.getNomeTarefa());
-			stmt.setString(3, tarefa.getDescricaoTarefa());
+			//stmt.setInt(1, tarefa.getUsuarioId());
+			stmt.setString(1,tarefa.getNomeTarefa());
+			stmt.setString(2, tarefa.getDescricaoTarefa());
+			stmt.setString(3, tarefa.getCategoria());
 			//stmt.setString(4, tarefa.getData());
 			stmt.execute();
 			stmt.close();
@@ -112,6 +113,22 @@ public class DAO {
 		catch(SQLException e){
 			e.printStackTrace();
 		}
+	}
+	
+	public void concluiTarefa(Tarefas tarefa){
+		String sql = "UPDATE Tarefa SET concluida =? WHERE id=?";
+		PreparedStatement stmt;
+		try {
+			stmt = (PreparedStatement) connection.prepareStatement(sql);
+			stmt.setString(1, tarefa.getConcluida());
+			stmt.setInt(2, tarefa.getId());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			//TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	public List<Tarefas> listaTarefas(){
@@ -191,6 +208,7 @@ public class DAO {
 				categoria.setNomeCategoria(rs.getString("nome_categoria"));
 				categoria.setPostIt(rs.getString("postit_color"));
 				categorias.add(categoria);
+				System.out.println(categoria.getNomeCategoria());
 			}			
 			rs.close();
 			stmt.close();

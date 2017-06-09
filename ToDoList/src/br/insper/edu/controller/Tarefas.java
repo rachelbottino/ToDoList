@@ -7,8 +7,15 @@ public class Tarefas {
 	private String nomeTarefa;
 	private String descricaoTarefa;
 	private String categoria;
+	private String concluida;
 
 	
+	public String getConcluida() {
+		return concluida;
+	}
+	public void setConcluida(String concluida) {
+		this.concluida = concluida;
+	}
 	public String getCategoria() {
 		return categoria;
 	}

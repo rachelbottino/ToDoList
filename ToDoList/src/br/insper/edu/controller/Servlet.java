@@ -98,27 +98,38 @@ public class Servlet extends HttpServlet {
 			System.out.println("CRIANDO NOVA TAREFA");
 			
 			nova_tarefa.setNomeTarefa(request.getParameter("nome_tarefa"));
-			nova_tarefa.setDescricaoTarefa("descricao_tarefa");
+			nova_tarefa.setDescricaoTarefa(request.getParameter("descricao_tarefa"));
+			nova_tarefa.setCategoria(request.getParameter("categoria"));
 			
-			String email = (String) session.getAttribute("email");
-			nova_tarefa.setUsuarioId(dao.getUsuarioId(email));
+//			String email = (String) session.getAttribute("email");
+//			nova_tarefa.setUsuarioId(dao.getUsuarioId(email));
 			dao.adicionaTarefa(nova_tarefa);
+			System.out.println("Tarefa adicionada");
 			request.getRequestDispatcher("Home.jsp").forward(request, response);
 		}
 		
 		else {
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
-			System.out.println("CAIU NO ELSE");
+			//System.out.println("CAIU NO ELSE");
 		}
 		
-		//BOTAO TAREFA FEITA
 		for (Tarefas tarefa : tarefas) {
+			//BOTAO APAGAR TAREFA
 			if(request.getParameter("apagar_"+tarefa.getId())!=null){
 				System.out.println(tarefa.getId());
 				System.out.println("Removendo tarefa");
 				dao.remove(tarefa);
 				request.getRequestDispatcher("Home.jsp").forward(request, response);
 			}
+			//BOTAO TAREFA FEITA
+			if(request.getParameter("feito_"+tarefa.getId())!=null){
+				System.out.println("entrou concluir");
+				tarefa.setConcluida("S");
+				dao.concluiTarefa(tarefa);
+				
+				request.getRequestDispatcher("Home.jsp").forward(request, response);				
+			}
+			request.getRequestDispatcher("Home.jsp").forward(request, response);
 		}
 			
 }

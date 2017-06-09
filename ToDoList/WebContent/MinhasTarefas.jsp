@@ -91,7 +91,37 @@
             <% } %>                
         </div>
     </section>
+    
+     <section id="todo" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <br>
+                    <h2 class="section-heading">Done</h2>
+                    <h3 class="section-subheading text-muted">Suas tarefas concluidas!</h3>                    
+                </div>
+            </div>
+            <div class="row">
+             <%	          
+	          for (Tarefas tarefa : tarefas) {
+	        	  if ("S".equals(tarefa.getConcluida())){
+	           %>
 
+            <!--INICIO CARD-->
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <div class="portfolio-caption">
+                        <h4><%=tarefa.getNomeTarefa()%></h4>
+                        <!--  <p class="text-muted">14/09</p>-->
+                    </div>
+                    <div class="portfolio-caption portfolio-hover-content portfolio-description postitazul"> 
+                    <header class="postitazul-header"><span class="text"></span></header>                    
+                        <h3><%=tarefa.getDescricaoTarefa()%></h3>                        
+                    </div>
+                </div>
+            <!--FIM CARD--> 
+            <% }} %>                
+        </div>
+    </section>
     <footer>
         <div class="container">
             <div class="row">
