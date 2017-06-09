@@ -32,6 +32,7 @@ public class Servlet extends HttpServlet {
 		Tarefas nova_tarefa = new Tarefas();
 		Categorias nova_categoria = new Categorias();
 		List<Tarefas> tarefas = dao.listaTarefas();
+		List<Categorias> categorias = dao.listaCategorias();
 		List<Tarefas> tarefasconcluidas = dao.listaTarefasConcluidas();
 		HttpSession session = request.getSession();
 		
@@ -92,6 +93,12 @@ public class Servlet extends HttpServlet {
 			nova_categoria.setUsuarioId(dao.getUsuarioId(email));
 			dao.adicionaCategoria(nova_categoria);
 			request.getRequestDispatcher("Home.jsp").forward(request, response);
+			
+			//TESTANDO LISTA CATEGORIAS:
+			for (Categorias categoria : categorias){
+				System.out.println(categoria.getNomeCategoria());
+				
+			}
 		}
 		
 		// BOTAO CRIAR TAREFA

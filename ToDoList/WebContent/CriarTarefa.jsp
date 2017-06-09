@@ -65,18 +65,19 @@
 	            </div>
 	            <div class="form-group">
 	                  <input list="categorias" class="form-control" name="categoria" placeholder="Categoria" required>
+		      
+	                  <datalist id="categorias">
 	                  <%
 			          DAO dao = new DAO();
 			          List<Categorias> categorias = dao.listaCategorias();
 			          String email = null;
 					  email = (String) session.getAttribute("user");
-			          
-			          for (Categorias categoria : categorias) {
-			           %>
-	                  <datalist id="categorias">
+	                  for (Categorias categoria : categorias) {
+				           %>
 	                        <option value="<%=categoria.getNomeCategoria()%>">
+	                        <%}%>
 	                  </datalist> 
-	                  <%}%>
+	                
 	            </div>
 	            <!-- 
 	            <div class="form-group">

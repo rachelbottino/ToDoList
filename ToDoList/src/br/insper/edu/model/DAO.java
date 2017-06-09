@@ -236,7 +236,7 @@ public class DAO {
 			while (rs.next()) {
 				Categorias categoria = new Categorias();
 				categoria.setNomeCategoria(rs.getString("nome_categoria"));
-				categoria.setPostIt(rs.getString("postit_color"));
+				categoria.setPostIt(rs.getString("postit"));
 				categorias.add(categoria);
 				System.out.println(categoria.getNomeCategoria());
 			}			
